@@ -3,7 +3,7 @@
 - TDD with RSpec
 - Goal: run `spec` files with RSpec for TDD
 
-# Hello
+## Hello
 
 - `rspec hello/hello_spec.rb`
 
