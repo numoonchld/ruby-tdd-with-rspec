@@ -7,6 +7,10 @@
 
 - `rspec hello/hello_spec.rb`
 
+## Student
+
+- `rspec 02_student/student_spec.rb`
+
 ## Initial Setup
 
 - install and configure **rbenv**
