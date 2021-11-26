@@ -11,4 +11,7 @@ class Calculator
   def self.quotient(num_a, num_b)
     num_a.to_f / num_b
   end
+  def self.exponent(num_a, num_b)
+    num_a ** num_b
+  end
 end

@@ -25,4 +25,10 @@ RSpec.describe Calculator do
       expect(calc_quotient).to eq(2)
     end
   end
+  context 'raise one number to the power of another' do
+    it 'should return the exponent' do
+      calc_exponent = Calculator.exponent(4,2)
+      expect(calc_exponent).to eq(16)
+    end
+  end
 end
