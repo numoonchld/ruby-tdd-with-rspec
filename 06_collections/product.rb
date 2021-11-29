@@ -26,4 +26,8 @@ class Product
     #reject method
     @@products.reject {|product| product.quantity > 0}
   end
+
+  def self.total_worth
+    @@products.reduce(0) { |accumulator, product| accumulator + (product.price * product.quantity) }
+  end
 end

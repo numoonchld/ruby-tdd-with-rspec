@@ -51,4 +51,12 @@ RSpec.describe Product do
 
     end
   end
+
+  context 'ability to get total products worth' do
+    it 'returns the sum of all price' do 
+
+      expect(Product.total_worth).to eq(3*25 + 5*15 + 0*30)
+
+    end
+  end
 end
