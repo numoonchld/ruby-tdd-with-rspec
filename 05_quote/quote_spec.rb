@@ -18,7 +18,7 @@ RSpec.describe QuoteString do
   end
   context 'quotes with %Q' do
     it 'should output interpolated text' do
-      # %q behaves like single quotes
+      # %Q behaves like double quotes or back-ticks
       sentence = %Q{The sum of 5+10 is #{@placeholder}}
       text = QuoteString.new sentence
       expect(text.to_s.start_with?('The sum')).to eq(true)
