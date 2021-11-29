@@ -6,7 +6,7 @@ RSpec.describe Product do
     @product_a = Product.new({id: 1, name: 'Item1', quantity: 3, price: 25})
   end
 
-  context 'getter methods tests:' do
+  context 'getter methods respond_to tests:' do
     it 'responds to id' do
       expect(@product_a).to respond_to(:id)
     end
@@ -20,5 +20,13 @@ RSpec.describe Product do
       expect(@product_a).to respond_to(:price)
     end
   end
-  
+
+  context 'getter methods value tests:' do
+    it 'returns correct attribute values' do
+      expect(@product_a.id).to eq 1
+      expect(@product_a.name).to eq 'Item1'
+      expect(@product_a.quantity).to eq 3
+      expect(@product_a.price).to eq 25
+    end
+  end
 end
