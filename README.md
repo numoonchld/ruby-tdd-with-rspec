@@ -2,6 +2,7 @@
 
 - TDD with RSpec
 - Goal: run `spec` files with RSpec for TDD
+  - basics of Ruby with RSpec gem
 
 ## Hello
 
