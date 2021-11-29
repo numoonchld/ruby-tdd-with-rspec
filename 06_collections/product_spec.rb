@@ -35,4 +35,20 @@ RSpec.describe Product do
       expect(Product.all).to eq [@product_a]
     end
   end
+
+  context 'get list of product names' do 
+    it 'returns list of product names' do 
+      expect(Product.all_product_names).to eq([@product_a.name])
+    end
+  end
+
+  context 'ability to filter' do 
+    it 'returns list of sold out products' do 
+      product_b = Product.new({id: 2, name: 'Item2', quantity: 5, price: 15})
+      product_c = Product.new({id: 3, name: 'Item3', quantity: 0, price: 30})
+
+      expect(Product.products_to_order).to eq [product_c]
+
+    end
+  end
 end
