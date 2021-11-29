@@ -4,12 +4,9 @@
 - Goal: run `spec` files with RSpec for TDD
   - basics of Ruby with RSpec gem
 
-## Hello
+## Exaples to run spec files
 
-- `rspec hello/hello_spec.rb`
-
-## Student
-
+- `rspec 01_hello/hello_spec.rb`
 - `rspec 02_student/student_spec.rb`
 
 ## Initial Setup
