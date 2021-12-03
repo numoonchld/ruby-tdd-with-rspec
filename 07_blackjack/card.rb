@@ -15,5 +15,11 @@ class Card
     end
   end
 
-
+  def to_s
+    if @show
+      "#{rank} of #{suit}"
+    else 
+      "FACEDOWN CARD"
+    end
+  end
 end
