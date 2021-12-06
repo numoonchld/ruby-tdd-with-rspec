@@ -47,7 +47,13 @@ RSpec.describe Hand do
       expect(@hand.get_value).to eq 10 + 9
     end
     it 'returns correct value with an Ace and a Jack' do
+      card_a = Card.new('Diamonds','Jack')
+      card_b = Card.new('Clubs','Ace')      
       
+      @hand.add_card card_a
+      @hand.add_card card_b
+
+      expect(@hand.get_value).to eq 10 + 11
     end
   end
 
