@@ -3,9 +3,11 @@ require_relative 'blackjack'
 RSpec.describe Blackjack do
   SUITS = ['Spades','Hearts', 'Clubs', 'Diamonds']
   RANKS = ['2','3','4','5','6','7','8','9','10','Jack','Queen','King', 'Ace']
+
   before do 
     @blackjack = Blackjack.new(SUITS,RANKS)
   end
+
   describe 'instance methods' do
     it 'responds to #dealer_hand' do
       expect(@blackjack).to respond_to :dealer_hand
@@ -36,6 +38,61 @@ RSpec.describe Blackjack do
     end
     it 'responds to #set_results' do
       expect(@blackjack).to respond_to :set_results
+    end
+  end
+
+  describe 'dealing cards' do
+    before do 
+      @blackjack.deal
+      @dealer_cards = @blackjack.dealer_hand.dealt_cards
+      @player_cards = @blackjack.player_hand.dealt_cards
+    end
+
+    it 'returns two cards for the dealer and the player' do
+      expect(@dealer_cards.count).to eq 2
+      expect(@player_cards.count).to eq 2
+    end
+
+    it 'does not display the dealers first card' do
+      expect(@dealer_cards.first.show).to eq false
+    end
+
+    it 'ends player turn if blackjack' do 
+      card_a = Card.new('Clubs','10')
+      card_b = Card.new('Hearts','Ace')
+      card_c = Card.new('Clubs','3')
+
+      card_d = Card.new('Diamonds','10')
+      card_e = Card.new('Diamonds','King')
+      card_f = Card.new('Hearts','Queen')
+
+      @blackjack  = Blackjack.new(SUITS, RANKS)
+      
+      # create a 6 card deck to perform tests
+      new_deck = [card_d, card_e, card_b, card_c, card_a, card_f]
+      @blackjack.deck.replace_with new_deck
+      @blackjack.deal
+      expect(@blackjack.current_gamer).to eq 'Dealer'  
+    end
+  end
+
+  describe 'hitting a hand' do
+
+    before do
+      @blackjack.deal
+      @dealer_cards = @blackjack.dealer_hand.dealt_cards
+      @player_cards = @blackjack.player_hand.dealt_cards
+    end
+
+    it 'can hit if playing is set to true' do
+      expect(@blackjack.playing).to eq true
+    end
+
+    it 'returns 2 cards for dealer but after hit, player will have 3 cards' do
+      @blackjack.hit
+
+      expect(@dealer_cards.count).to eq 2
+      expect(@player_cards.count).to eq 3
     end
   end
 end
