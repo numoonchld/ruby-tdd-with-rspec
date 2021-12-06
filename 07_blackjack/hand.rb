@@ -40,4 +40,20 @@ class Hand
     # end
     # value
   end
+
+  def to_s
+
+    report = dealt_cards.reduce('') { |acc, val| 
+      if val.show
+        acc + val.to_s + ', '
+      else 
+        acc 
+      end
+      }
+    if dealt_cards.first.show == false
+      report += "Total Value: #{get_value - VALUES[dealt_cards.first.rank.to_sym]}"
+    else
+       report += "Total Value: #{get_value}"
+    end
+  end
 end
