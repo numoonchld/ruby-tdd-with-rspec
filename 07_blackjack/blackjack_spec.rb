@@ -202,4 +202,122 @@ RSpec.describe Blackjack do
       expect(@blackjack.show_hands).to match(/Total Value:/)
     end
   end
+
+  describe 'setting reuslts' do
+    it 'sets the correct result when player busts' do
+      # player cards
+      card_a = Card.new('Clubs','10')
+      card_b = Card.new('Hearts','10')
+      card_c = Card.new('Diamonds','2')
+      
+      # dealer cards
+      card_d = Card.new('Spades','10')
+      card_e = Card.new('Clubs','10')
+      card_f = Card.new('Hearts','Queen')
+
+      @blackjack = Blackjack.new(SUITS, RANKS)
+      
+      # create a 6 card deck to perform tests
+      new_deck = [card_f, card_c, card_b, card_e, card_a, card_d]
+      @blackjack.deck.replace_with new_deck
+      @blackjack.deal
+      @blackjack.hit #player hits to bust
+
+      expect(@blackjack.set_results).to eq 'Player Busted!'
+    end
+    it 'sets the correct result when dealer busts' do
+      # player cards
+      card_a = Card.new('Clubs','10')
+      card_b = Card.new('Hearts','6')
+      card_c = Card.new('Diamonds','Ace')
+      
+      # dealer cards
+      card_d = Card.new('Spades','10')
+      card_e = Card.new('Clubs','10')
+      card_f = Card.new('Hearts','Queen')
+
+      @blackjack = Blackjack.new(SUITS, RANKS)
+      
+      # create a 6 card deck to perform tests
+      new_deck = [card_f, card_c, card_b, card_e, card_a, card_d]
+      @blackjack.deck.replace_with new_deck
+      @blackjack.deal
+      @blackjack.hit #player hits to get 21
+      @blackjack.stand #player stands, dealer's turn
+      @blackjack.hit # dealer hits to bust
+
+      expect(@blackjack.set_results).to eq 'Dealer Busted!'
+      
+    end
+    it 'sets the correct result when tied' do
+      # player cards
+      card_a = Card.new('Clubs','10')
+      card_b = Card.new('Hearts','10')
+      card_c = Card.new('Diamonds','Ace')
+      
+      # dealer cards
+      card_d = Card.new('Spades','10')
+      card_e = Card.new('Clubs','10')
+      card_f = Card.new('Hearts','Ace')
+
+      @blackjack = Blackjack.new(SUITS, RANKS)
+      
+      # create a 6 card deck to perform tests
+      new_deck = [card_f, card_c, card_b, card_e, card_a, card_d]
+      @blackjack.deck.replace_with new_deck
+      @blackjack.deal
+      @blackjack.hit #player hits to get 21
+      @blackjack.stand #player stands, dealer's turn
+      @blackjack.hit # dealer hits to get 21
+
+      expect(@blackjack.set_results).to eq 'Game Tied!'
+    end
+    it 'sets the correct result when player wins' do
+      # player cards
+      card_a = Card.new('Clubs','10')
+      card_b = Card.new('Hearts','10')
+      card_c = Card.new('Diamonds','Ace')
+      
+      # dealer cards
+      card_d = Card.new('Spades','10')
+      card_e = Card.new('Clubs','9')
+      card_f = Card.new('Hearts','Ace')
+
+      @blackjack = Blackjack.new(SUITS, RANKS)
+      
+      # create a 6 card deck to perform tests
+      new_deck = [card_f, card_c, card_b, card_e, card_a, card_d]
+      @blackjack.deck.replace_with new_deck
+      @blackjack.deal
+      @blackjack.hit #player hits to get 21
+      @blackjack.stand #player stands, dealer's turn
+      @blackjack.hit # dealer hits to get 20
+
+      expect(@blackjack.set_results).to eq 'Player Wins!'      
+    end
+    it 'sets the correct result when dealer wins' do
+      # player cards
+      card_a = Card.new('Clubs','10')
+      card_b = Card.new('Hearts','9')
+      card_c = Card.new('Diamonds','Ace')
+      
+      # dealer cards
+      card_d = Card.new('Spades','10')
+      card_e = Card.new('Clubs','10')
+      card_f = Card.new('Hearts','Ace')
+
+      @blackjack = Blackjack.new(SUITS, RANKS)
+      
+      # create a 6 card deck to perform tests
+      new_deck = [card_f, card_c, card_b, card_e, card_a, card_d]
+      @blackjack.deck.replace_with new_deck
+      @blackjack.deal
+      @blackjack.hit #player hits to get 20
+      @blackjack.stand #player stands, dealer's turn
+      @blackjack.hit # dealer hits to get 21 and wins
+
+      expect(@blackjack.set_results).to eq 'Player Loses!'        
+      
+    end
+  end
 end
