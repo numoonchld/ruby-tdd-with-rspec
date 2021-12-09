@@ -3,7 +3,7 @@ require_relative 'hand'
 
 class Blackjack
   attr_reader :player_hand, :dealer_hand, :playing, :deck
-  attr_accessor :current_gamer
+  attr_accessor :current_gamer, :result
 
   def initialize(suits,ranks)
     @player_hand = nil
@@ -25,7 +25,7 @@ class Blackjack
         @player_hand.add_card(@deck.deal_card)
       end
     end
-    dealer_hand.dealt_cards.first.show = false 
+    @dealer_hand.dealt_cards.first.show = false 
     @playing = true
     values_of_ten = ['10','Jack','Queen', 'King']
     player_cards = player_hand.dealt_cards
@@ -46,6 +46,11 @@ class Blackjack
   end
 
   def stand
+    if @playing
+      if current_gamer == 'Player'
+        @current_gamer = 'Dealer'
+      end
+    end
   end
 
   def show_hands
@@ -55,8 +60,10 @@ class Blackjack
   end
 
   def to_s
-    puts "Player hand: #{player_hand.get_value}"
-    puts "Dealer hand: #{dealer_hand.get_value}"
+    puts "Player hand value: #{player_hand.get_value}"
+    puts "Player has #{player_hand.dealt_cards.count} cards."
+    puts "Dealer hand value: #{dealer_hand.get_value}"
+    puts "Dealer has #{dealer_hand.dealt_cards.count} cards."
   end
 
   private 

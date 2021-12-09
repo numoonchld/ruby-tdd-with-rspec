@@ -6,3 +6,8 @@ game = Blackjack.new(SUITS, RANKS)
 game.deal
 puts game
 puts game.show_hands
+
+game.hit
+game.current_gamer = "Dealer"
+game.hit
+puts game

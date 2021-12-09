@@ -94,5 +94,74 @@ RSpec.describe Blackjack do
       expect(@dealer_cards.count).to eq 2
       expect(@player_cards.count).to eq 3
     end
+    it 'correctly determines if player is busted' do 
+      # player cards
+      card_a = Card.new('Clubs','10')
+      card_b = Card.new('Hearts','10')
+      card_c = Card.new('Diamonds','2')
+      
+      # dealer cards
+      card_d = Card.new('Spades','10')
+      card_e = Card.new('Clubs','10')
+      card_f = Card.new('Hearts','Queen')
+
+      @blackjack = Blackjack.new(SUITS, RANKS)
+      
+      # create a 6 card deck to perform tests
+      new_deck = [card_f, card_c, card_b, card_e, card_a, card_d]
+      @blackjack.deck.replace_with new_deck
+      @blackjack.deal
+      @blackjack.hit
+      expect(@blackjack.result).to eq 'Player busted!'  
+    end
+    it 'correctly determines if dealer is busted' do 
+      # player cards
+      card_a = Card.new('Clubs','10')
+      card_b = Card.new('Hearts','Ace')
+      card_c = Card.new('Diamonds','Ace')
+      
+      # dealer cards
+      card_d = Card.new('Spades','10')
+      card_e = Card.new('Clubs','10')
+      card_f = Card.new('Hearts','Queen')
+
+      @blackjack  = Blackjack.new(SUITS, RANKS)
+      
+      # create a 6 card deck to perform tests
+      new_deck = [card_f, card_c, card_b, card_e, card_a, card_d]
+      @blackjack.deck.replace_with new_deck
+      @blackjack.deal
+      @blackjack.hit
+      @blackjack.current_gamer = 'Dealer'
+      @blackjack.hit
+      expect(@blackjack.result).to eq 'Dealer busted!'  
+    end
+  end
+
+  describe 'standing' do
+    before do 
+      @blackjack = Blackjack.new(SUITS, RANKS)
+    end
+
+    it 'gamer switches to DEALER when PLAYER stands' do
+      # player cards
+      card_a = Card.new('Clubs','10')
+      card_b = Card.new('Hearts','Ace')
+      card_c = Card.new('Diamonds','Ace')
+      
+      # dealer cards
+      card_d = Card.new('Spades','10')
+      card_e = Card.new('Clubs','3')
+      card_f = Card.new('Hearts','Queen')
+      
+      # create a 6 card deck to perform tests
+      new_deck = [card_f, card_c, card_b, card_e, card_a, card_d]
+      @blackjack.deck.replace_with new_deck
+      @blackjack.deal
+      @blackjack.hit
+      @blackjack.stand
+
+      expect(@blackjack.current_gamer).to eq("Dealer")
+    end
   end
 end
