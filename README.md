@@ -1,3 +1,5 @@
+[**My Completion Certificate**](https://www.udemy.com/certificate/UC-882bb5a9-f38d-4587-a2c1-cfeed91bcb3b/)
+
 # Notes
 
 - TDD with RSpec
