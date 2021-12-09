@@ -8,6 +8,7 @@
 
 - `rspec 01_hello/hello_spec.rb`
 - `rspec 02_student/student_spec.rb`
+- `ruby 07_blackjack/blackjack_runner.rb`
 
 # General Ruby notes
 
