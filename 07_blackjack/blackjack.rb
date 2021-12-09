@@ -49,11 +49,17 @@ class Blackjack
     if @playing
       if current_gamer == 'Player'
         @current_gamer = 'Dealer'
+        dealer_hand.dealt_cards.first.show = true
+      end
+
+      while dealer_hand.get_value < 17
+        hit
       end
     end
   end
 
   def show_hands
+    "Player's hand: #{player_hand}\nDealer's hand: #{dealer_hand}"
   end
 
   def set_results
