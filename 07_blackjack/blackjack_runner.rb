@@ -37,3 +37,4 @@ while game.player_hand.get_value <= 21 do
   end
 end
 
+puts game.set_results 
